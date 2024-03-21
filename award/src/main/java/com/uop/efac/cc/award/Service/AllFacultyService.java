@@ -228,7 +228,7 @@ public class AllFacultyService {
                             student.getResultsMap().add(newResultMap);
                         }
 
-                        //Add Student To List
+                        //Add Student To findStudentInList
                         if (!findStudentInList.isPresent()) {
                             studentList.add(student);
                         }
