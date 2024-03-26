@@ -63,6 +63,9 @@ public class AllFacultyService {
     @Autowired
     private GUNAWARDENAELECTRONICALPRIZEService gunawardenaelectronicalprizeService;
 
+    @Autowired
+    SAMUELENTHUSIASMANDEXCELLENCEPRIZEService samuelenthusiasmandexcellenceprizeService;
+
 
     public ResponseEntity<String> selectService(Award award, MultipartFile file, Department department) {
         List<Subject> subjectList = new ArrayList<>();
@@ -153,33 +156,64 @@ public class AllFacultyService {
             return jayasekaraprizeService.getFacultyAward(file, subjectList);
         }
 
-        // RANAWEERA PRIZE FOR FINITE ELEMENT METHODS IN SOLID MECHANICS CE
-        if (award.equals(AWARD22) && department.equals(CE)) {
-            ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
-            return pranaweeraprizeService.getFacultyAward(file, subjectList);
-        }
-
         // REGULATIONS GOVERNING THE AWARD OF P.M RANAWEERA PRIZE FOR COMPUTER AIDED STRUCTURAL DESIGN CE
         if (award.equals(AWARD21) && department.equals(CE)) {
             ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
             return pranaweerastructuraldesignprizeService.getFacultyAward(file, subjectList);
         }
 
+        // RANAWEERA PRIZE FOR FINITE ELEMENT METHODS IN SOLID MECHANICS CE
+        if (award.equals(AWARD22) && department.equals(CE)) {
+            ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
+            return pranaweeraprizeService.getFacultyAward(file, subjectList);
+        }
 
-        // GUNAWARDENA PRIZE FOR THE BEST PERFORMANCE IN CONTROL ENGINEERING
+        // GUNAWARDENA PRIZE FOR THE BEST PERFORMANCE IN CONTROL ENGINEERING EE
         if (award.equals(AWARD24) && department.equals(EE)) {
             ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
             return gunawardenacontrolprizeService.getFacultyAward(file, subjectList);
         }
 
-        // PROFESSOR JA GUNAWARDENA PRIZE FOR THE BEST PERFORMANCE IN ELECTRONICAL ENGINEERING
+        // PROFESSOR JA GUNAWARDENA PRIZE FOR THE BEST PERFORMANCE IN ELECTRONICAL ENGINEERING EE
         if (award.equals(AWARD25) && department.equals(EE)) {
             ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
             return gunawardenaelectronicalprizeService.getFacultyAward(file, subjectList);
         }
 
+        // PROFESSOR T.D.M.A SAMUEL PRIZE FOR AND ENTHUSIASM AND EXCELLENCE IN ENGINEERING MATHEMATICS CE
+        if (award.equals(AWARD23) && department.equals(CE)) {
+            ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
+            return samuelenthusiasmandexcellenceprizeService.getFacultyAward(file, subjectList);
+        }
 
+        // PROFESSOR T.D.M.A SAMUEL PRIZE FOR AND ENTHUSIASM AND EXCELLENCE IN ENGINEERING MATHEMATICS EE
+        if (award.equals(AWARD23) && department.equals(EE)) {
+            ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
+            return samuelenthusiasmandexcellenceprizeService.getFacultyAward(file, subjectList);
+        }
 
+        // PROFESSOR T.D.M.A SAMUEL PRIZE FOR AND ENTHUSIASM AND EXCELLENCE IN ENGINEERING MATHEMATICS CO
+        if (award.equals(AWARD23) && department.equals(CO)) {
+            ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
+            return samuelenthusiasmandexcellenceprizeService.getFacultyAward(file, subjectList);
+        }
+
+        // PROFESSOR T.D.M.A SAMUEL PRIZE FOR AND ENTHUSIASM AND EXCELLENCE IN ENGINEERING MATHEMATICS CP
+        if (award.equals(AWARD23) && department.equals(CP)) {
+            ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
+            return samuelenthusiasmandexcellenceprizeService.getFacultyAward(file, subjectList);
+        }
+        // PROFESSOR T.D.M.A SAMUEL PRIZE FOR AND ENTHUSIASM AND EXCELLENCE IN ENGINEERING MATHEMATICS ME
+        if (award.equals(AWARD23) && department.equals(ME)) {
+            ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
+            return samuelenthusiasmandexcellenceprizeService.getFacultyAward(file, subjectList);
+        }
+        // PROFESSOR T.D.M.A SAMUEL PRIZE FOR AND ENTHUSIASM AND EXCELLENCE IN ENGINEERING MATHEMATICS PR
+        if (award.equals(AWARD23) && department.equals(PR)) {
+            ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
+            return samuelenthusiasmandexcellenceprizeService.getFacultyAward(file, subjectList);
+        }
+        
 
 
         return new ResponseEntity<>("Please Select Correct Award and Department.", HttpStatus.BAD_REQUEST);

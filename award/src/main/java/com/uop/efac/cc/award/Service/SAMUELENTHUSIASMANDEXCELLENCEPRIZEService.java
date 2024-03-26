@@ -13,8 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 @Service
-public class PRANAWEERASTRUCTURALDESIGNPRIZEService {
+public class SAMUELENTHUSIASMANDEXCELLENCEPRIZEService {
 
 
         @Autowired
@@ -33,7 +34,7 @@ public class PRANAWEERASTRUCTURALDESIGNPRIZEService {
             allFacultyService.ReadResultCSV(file, studentList);
 
             // GPA Calculation
-            List<Student> studentListPRANAWEERA = new ArrayList<>();
+            List<Student> studentListEOEI = new ArrayList<>();
             for (Student student : studentList) {
                 Double totalGPA = 0.0;
                 Integer totalCredits = 0;
@@ -41,7 +42,7 @@ public class PRANAWEERASTRUCTURALDESIGNPRIZEService {
                 Integer totalCourses = 0;
                 Integer totalAAPlus = 0;
                 Double aAPlusPercentage = 0.0;
-                boolean isEligibleForPRWSD = false;
+
                 for (Map<String, String> result : student.getResultsMap()) {
                     for (Map.Entry<String, String> entry : result.entrySet()) {
                         String code = entry.getKey();
@@ -56,9 +57,7 @@ public class PRANAWEERASTRUCTURALDESIGNPRIZEService {
                             Subject subjectFound = subjectFromCode.get();
                             Integer credits = subjectFound.getCredits();
 
-                            if (code.contains("CE584") && code.contains("CE594") ) {
-                                isEligibleForPRWSD = true;
-                            }
+
                             //GPA Calculation
                             Double gpaSubject = credits * gpa;
                             totalGPA += gpaSubject;
@@ -80,10 +79,6 @@ public class PRANAWEERASTRUCTURALDESIGNPRIZEService {
                 // Average Total Courses
                 averageGPA = totalGPA / totalCredits;
 
-                //Check The Eligibility for PRANAWEERA STRUCTURAL DESIGN
-                if(isEligibleForPRWSD) {
-                    studentListPRANAWEERA.add(student);
-                }
 
                 //Calculate aAPlusPercentage
                 if (totalCourses > 0) {
@@ -107,7 +102,7 @@ public class PRANAWEERASTRUCTURALDESIGNPRIZEService {
 
             // Printing The Sorted list
             sortedStudents.forEach(student -> System.out.println(
-                    "Registration Number: " + student.getRegistrationNumber() +
+                           "Registration Number: " + student.getRegistrationNumber() +
                             ", Total GPA: " + student.getTotalGPA() +
                             ", Total Credits: " + student.getTotalCredits() +
                             ", Average GPA: " + student.getAverageGPA() +
