@@ -9,6 +9,7 @@ public enum CourseCreditsCSV {
     PR_CSV("Courses-and-CreditsPR.csv");
 
 
+
     private String creditCSV;
     CourseCreditsCSV(String creditCSV) { this.creditCSV = creditCSV; }
     public String getCreditCSV() { return creditCSV; }

@@ -11,6 +11,7 @@ public enum GradeAndPoint {
     C("C", 2.0),
     C_MINUS("C-", 1.7),
     D_PLUS("D+", 1.3),
+    D("D", 1.0),
     E("E", 0.0),
     F("F", 0.0);
 

@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class PRANAWEERAPRIZEService {
+public class PRANAWEERASTRUCTURALDESIGNPRIZEService {
 
 
         @Autowired
@@ -56,7 +56,7 @@ public class PRANAWEERAPRIZEService {
                             Subject subjectFound = subjectFromCode.get();
                             Integer credits = subjectFound.getCredits();
 
-                            if (code.contains("CE307")) {
+                            if (code.contains("CE584") && code.contains("CE594") ) {
                                 isEligibleForPRW = true;
                             }
                             //GPA Calculation

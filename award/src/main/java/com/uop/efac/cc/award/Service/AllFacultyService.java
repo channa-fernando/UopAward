@@ -52,7 +52,10 @@ public class AllFacultyService {
     private JAYASEKARAPRIZEService jayasekaraprizeService;
 
     @Autowired
-    private PRANAWEERAPRIZEService pranaweeraprizeService;
+    private PRANAWEERAFINITEPRIZEService pranaweeraprizeService;
+
+    @Autowired
+    PRANAWEERASTRUCTURALDESIGNPRIZEService pranaweerastructuraldesignprizeService;
 
     @Autowired
     private GUNAWARDENACONTROLPRIZEService gunawardenacontrolprizeService;
@@ -124,17 +127,19 @@ public class AllFacultyService {
             return thurairajahprizeService.getFacultyAward(file, subjectList);
         }
 
+        // HB de SILVA PRIZE FOR SURVEYING CE
+        if (award.equals(AWARD12) && department.equals(CE)) {
+            ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
+            return silvaprizeService.getFacultyAward(file, subjectList);
+        }
+
+
         // AMAMARATHUNGA PRIZE FOR STRENGTH OF MATERIALS CE
         if (award.equals(AWARD14) && department.equals(CE)) {
             ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
             return amarathungaprizeService.getFacultyAward(file, subjectList);
         }
 
-        // HB de SILVA PRIZE FOR SURVEYING CE
-        if (award.equals(AWARD12) && department.equals(CE)) {
-            ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
-            return silvaprizeService.getFacultyAward(file, subjectList);
-        }
 
         // MAHALINGAM PRIZE FOR MECHANICS OF MACHINES ME
         if (award.equals(AWARD19) && department.equals(ME)) {
@@ -154,6 +159,12 @@ public class AllFacultyService {
             return pranaweeraprizeService.getFacultyAward(file, subjectList);
         }
 
+        // REGULATIONS GOVERNING THE AWARD OF P.M RANAWEERA PRIZE FOR COMPUTER AIDED STRUCTURAL DESIGN CE
+        if (award.equals(AWARD21) && department.equals(CE)) {
+            ReadCourseCreditCSV(subjectList, CE_CSV.getCreditCSV());
+            return pranaweerastructuraldesignprizeService.getFacultyAward(file, subjectList);
+        }
+
 
         // GUNAWARDENA PRIZE FOR THE BEST PERFORMANCE IN CONTROL ENGINEERING
         if (award.equals(AWARD24) && department.equals(EE)) {
@@ -166,6 +177,10 @@ public class AllFacultyService {
             ReadCourseCreditCSV(subjectList, EE_CSV.getCreditCSV());
             return gunawardenaelectronicalprizeService.getFacultyAward(file, subjectList);
         }
+
+
+
+
 
         return new ResponseEntity<>("Please Select Correct Award and Department.", HttpStatus.BAD_REQUEST);
 

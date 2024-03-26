@@ -1,5 +1,6 @@
 package com.uop.efac.cc.award.Service;
 
+
 import com.uop.efac.cc.award.Dto.Student;
 import com.uop.efac.cc.award.Dto.Subject;
 import com.uop.efac.cc.award.Enum.GradeAndPoint;
@@ -13,7 +14,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class AMARATHUNGAPRIZEService {
+public class PRANAWEERAFINITEPRIZEService {
+
 
         @Autowired
         private AllFacultyService allFacultyService;
@@ -26,12 +28,12 @@ public class AMARATHUNGAPRIZEService {
             // Create New Array List for Students
             List<Student> studentList = new ArrayList<>();
 
+
             // File Reading In Media
             allFacultyService.ReadResultCSV(file, studentList);
 
-
             // GPA Calculation
-            List<Student> studentListAMARATHUNGA = new ArrayList<>();
+            List<Student> studentListPRANAWEERA = new ArrayList<>();
             for (Student student : studentList) {
                 Double totalGPA = 0.0;
                 Integer totalCredits = 0;
@@ -39,15 +41,12 @@ public class AMARATHUNGAPRIZEService {
                 Integer totalCourses = 0;
                 Integer totalAAPlus = 0;
                 Double aAPlusPercentage = 0.0;
-                boolean isEligibleForAMP = false;
-
-                Integer credits = null;
-                Double gpa = null;
+                boolean isEligibleForPRW = false;
                 for (Map<String, String> result : student.getResultsMap()) {
                     for (Map.Entry<String, String> entry : result.entrySet()) {
                         String code = entry.getKey();
                         String grade = entry.getValue();
-                        gpa = GradeAndPoint.fromGrade(grade).getPoint();
+                        Double gpa =  GradeAndPoint.fromGrade(grade).getPoint();
                         if (gpa == null) {
                             gpa = 0.0;
                         }
@@ -55,18 +54,17 @@ public class AMARATHUNGAPRIZEService {
                         Optional<Subject> subjectFromCode = subjects.stream().filter(s -> s.getCode().equals(code)).findAny();
                         if (subjectFromCode.isPresent()) {
                             Subject subjectFound = subjectFromCode.get();
-                            credits = subjectFound.getCredits();
+                            Integer credits = subjectFound.getCredits();
 
-                            if (code.contains("CE201")) {
-                                isEligibleForAMP = true;
+                            if (code.contains("CE307")) {
+                                isEligibleForPRW = true;
                             }
                             //GPA Calculation
                             Double gpaSubject = credits * gpa;
                             totalGPA += gpaSubject;
                             totalCredits += credits;
 
-
-                            // Total Coorses
+                            // AAPlus Calculation
                             totalCourses += 1;
 
                             //Find A,A Plus Courses
@@ -82,11 +80,10 @@ public class AMARATHUNGAPRIZEService {
                 // Average Total Courses
                 averageGPA = totalGPA / totalCredits;
 
-                //Check The Eligibility for AMARATHUNGA
-                if (isEligibleForAMP) {
-                    studentListAMARATHUNGA.add(student);
+                //Check The Eligibility for PRANAWEERA
+                if(isEligibleForPRW) {
+                    studentListPRANAWEERA.add(student);
                 }
-
 
                 //Calculate aAPlusPercentage
                 if (totalCourses > 0) {
@@ -108,11 +105,9 @@ public class AMARATHUNGAPRIZEService {
 
             Collections.reverse(sortedStudents);
 
-            List<Student> reverseSortedStudents = studentList.stream().sorted(Comparator.comparingDouble(Student::getAverageGPA).thenComparingDouble(Student::getPercentageAAPlus).reversed()).collect(Collectors.toList());
-
             // Printing The Sorted list
             sortedStudents.forEach(student -> System.out.println(
-                            "Registration Number: " + student.getRegistrationNumber() +
+                    "Registration Number: " + student.getRegistrationNumber() +
                             ", Total GPA: " + student.getTotalGPA() +
                             ", Total Credits: " + student.getTotalCredits() +
                             ", Average GPA: " + student.getAverageGPA() +
@@ -126,6 +121,4 @@ public class AMARATHUNGAPRIZEService {
 
         }
 
-    }
-
-
+}
